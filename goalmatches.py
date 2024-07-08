@@ -9,7 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Tokeni doğrudan kod içerisine ekledik
 GITHUB_TOKEN = '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'
 REPO_OWNER = 'hakangzlyrt'
 REPO_NAME = 'goal-com-api'
@@ -65,16 +64,14 @@ def veri_cek():
                 takim2 = match.find_elements(By.CSS_SELECTOR, 'h4[data-testid="team-name"]')[1].text.strip()
                 takim2resim = match.find_elements(By.CSS_SELECTOR, 'img[data-testid="team-crest"]')[1].get_attribute('src')
 
-                # Maçın ertelenip ertelenmediğini kontrol et
                 ertelendi = match.find_elements(By.CSS_SELECTOR, 'span[data-testid="result-inactive-status"]')
                 if ertelendi:
-                    skor = "ERT"  # Maç ertelendiyse "ERT" kullan
+                    skor = "ERT"
                 else:
                     takim1skor = match.find_element(By.CSS_SELECTOR, 'p.result_team-a__jx1EM').text.strip()
                     takim2skor = match.find_element(By.CSS_SELECTOR, 'p.result_team-b__kNMbF').text.strip()
                     skor = f"{takim1skor} - {takim2skor}"
 
-                # Zaman bilgilerini al
                 zaman_elementi = match.find_elements(By.CSS_SELECTOR, 'span[data-testid="status-full-time"], span[data-testid="status-period"], time[data-testid="status-start-date"]')
                 saat = ", ".join([elem.text.strip() for elem in zaman_elementi if elem.text.strip()])
 
@@ -87,7 +84,6 @@ def veri_cek():
                     'saat': saat or ""
                 }
 
-                # Maçın bitip bitmediğini kontrol et ve uygun dosyaya ekle
                 if 'status-full-time' in [elem.get_attribute('data-testid') for elem in zaman_elementi]:
                     finished_matches.append(match_info)
                     print(f"Biten Maç: {match_info}")
