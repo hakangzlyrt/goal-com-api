@@ -8,7 +8,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 
+# Tokeni doğrudan script içerisinde kullanmak yerine çevresel değişkenlerden almak güvenlik açısından daha iyidir.
+# Ancak, sizin talebiniz üzerine token doğrudan script içinde kullanılmıştır.
 GITHUB_TOKEN = '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'
 REPO_OWNER = 'hakangzlyrt'
 REPO_NAME = 'goal-com-api'
