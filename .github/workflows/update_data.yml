@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
@@ -36,6 +36,8 @@ jobs:
         sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
     - name: Run Python script
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: python veri_cek.py
 
     - name: Commit and push changes
