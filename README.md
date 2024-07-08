@@ -1,10 +1,14 @@
 # goal-com-api
+
 goal.com'dan verileri çekmek için kullanılmaktadır.
 
+## JSON Formatı
 
-//Maçlar bu şekilde json formatında saklanıyor.Uygulamada kullanılmak için çok güzel basit bir kullanımı var.
-'''
- {
+Maçlar bu şekilde JSON formatında saklanıyor. Uygulamada kullanılmak için çok güzel ve basit bir kullanımı var.
+
+```json
+[
+    {
         "takim1": "Internacional",
         "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/c7n1isjmpyqt5pj51yekr08wo.png",
         "takim2": "Vasco da Gama",
@@ -19,6 +23,5 @@ goal.com'dan verileri çekmek için kullanılmaktadır.
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/9ri292j4uqvn567soly0xrmrx.png",
         "skor": "2 - 1",
         "saat": "MS"
-    },
-    
-'''
+    }
+]
