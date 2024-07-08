@@ -1,4 +1,4 @@
-name: Update Scores
+name: Update Files
 
 on:
   schedule:
