@@ -3,6 +3,7 @@ goal.com'dan verileri çekmek için kullanılmaktadır.
 
 
 //Maçlar bu şekilde json formatında saklanıyor.Uygulamada kullanılmak için çok güzel basit bir kullanımı var.
+'''
  {
         "takim1": "Internacional",
         "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/c7n1isjmpyqt5pj51yekr08wo.png",
@@ -20,3 +21,4 @@ goal.com'dan verileri çekmek için kullanılmaktadır.
         "saat": "MS"
     },
     
+'''
