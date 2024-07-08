@@ -1,11 +1,27 @@
-import schedule
-import time
 import json
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+GOAL_MACLAR_PATH = 'goal_maclar.json'
+GOAL_BITMIS_MACLAR_PATH = 'goal_bitmis_maclar.json'
+
+def save_data_to_file(data, file_path):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    print(f"Veriler {file_path} dosyasına başarıyla kaydedildi.")
+
+def read_data_from_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        print(f"{file_path} dosyası okunamadı: {e}")
+        return []
 
 def veri_cek():
     try:
@@ -30,16 +46,14 @@ def veri_cek():
                 takim2 = match.find_elements(By.CSS_SELECTOR, 'h4[data-testid="team-name"]')[1].text.strip()
                 takim2resim = match.find_elements(By.CSS_SELECTOR, 'img[data-testid="team-crest"]')[1].get_attribute('src')
 
-                # Maçın ertelenip ertelenmediğini kontrol et
                 ertelendi = match.find_elements(By.CSS_SELECTOR, 'span[data-testid="result-inactive-status"]')
                 if ertelendi:
-                    skor = "ERT"  # Maç ertelendiyse "ERT" kullan
+                    skor = "ERT"
                 else:
                     takim1skor = match.find_element(By.CSS_SELECTOR, 'p.result_team-a__jx1EM').text.strip()
                     takim2skor = match.find_element(By.CSS_SELECTOR, 'p.result_team-b__kNMbF').text.strip()
                     skor = f"{takim1skor} - {takim2skor}"
 
-                # Zaman bilgilerini al
                 zaman_elementi = match.find_elements(By.CSS_SELECTOR, 'span[data-testid="status-full-time"], span[data-testid="status-period"], time[data-testid="status-start-date"]')
                 saat = ", ".join([elem.text.strip() for elem in zaman_elementi if elem.text.strip()])
 
@@ -52,7 +66,6 @@ def veri_cek():
                     'saat': saat or ""
                 }
 
-                # Maçın bitip bitmediğini kontrol et ve uygun dosyaya ekle
                 if 'status-full-time' in [elem.get_attribute('data-testid') for elem in zaman_elementi]:
                     finished_matches.append(match_info)
                     print(f"Biten Maç: {match_info}")
@@ -66,42 +79,29 @@ def veri_cek():
         driver.quit()
 
         if matches:
-            with open('goal_maclar.json', 'w', encoding='utf-8') as f:
-                json.dump(matches, f, ensure_ascii=False, indent=4)
-            print("Maç verileri goal_maclar.json dosyasına başarıyla kaydedildi.")
+            save_data_to_file(matches, GOAL_MACLAR_PATH)
         else:
             print("Veri bulunamadı veya yapı değişti.")
 
         if finished_matches:
-            with open('goal_bitmis_maclar.json', 'w', encoding='utf-8') as f:
-                json.dump(finished_matches, f, ensure_ascii=False, indent=4)
-            print("Biten maç verileri goal_bitmis_maclar.json dosyasına başarıyla kaydedildi.")
+            save_data_to_file(finished_matches, GOAL_BITMIS_MACLAR_PATH)
         else:
             print("Biten maç verisi bulunamadı veya yapı değişti.")
-        
+
         try:
-            with open('goal_maclar.json', 'r', encoding='utf-8') as f:
-                matches = json.load(f)
-            print(f"goal_maclar.json dosyası {len(matches)} eleman içeriyor.")
+            existing_matches = read_data_from_file(GOAL_MACLAR_PATH)
+            print(f"{GOAL_MACLAR_PATH} dosyası {len(existing_matches)} eleman içeriyor.")
         except Exception as e:
             print(f"Dosya okuma hatası: {e}")
 
         try:
-            with open('goal_bitmis_maclar.json', 'r', encoding='utf-8') as f:
-                finished_matches = json.load(f)
-            print(f"goal_bitmis_maclar.json dosyası {len(finished_matches)} eleman içeriyor.")
+            existing_finished_matches = read_data_from_file(GOAL_BITMIS_MACLAR_PATH)
+            print(f"{GOAL_BITMIS_MACLAR_PATH} dosyası {len(existing_finished_matches)} eleman içeriyor.")
         except Exception as e:
             print(f"Dosya okuma hatası: {e}")
 
     except Exception as e:
         print(f"Veri çekme sırasında hata oluştu: {e}")
 
-def surekli_veri_cekme():
-    schedule.every(1).minutes.do(veri_cek)
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
 if __name__ == "__main__":
-    surekli_veri_cekme()
+    veri_cek()
