@@ -1,27 +1,43 @@
+import schedule
+import time
 import json
-import os
+import base64
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-GOAL_MACLAR_PATH = 'goal_maclar.json'
-GOAL_BITMIS_MACLAR_PATH = 'goal_bitmis_maclar.json'
+GITHUB_TOKEN = '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'
+REPO_OWNER = 'hakangzlyrt'
+REPO_NAME = 'goal-com-api'
+FILES = {
+    'goal_maclar.json': 'goal_maclar.json',
+    'goal_bitmis_maclar.json': 'goal_bitmis_maclar.json'
+}
 
-def save_data_to_file(data, file_path):
-    with open(file_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-    print(f"Veriler {file_path} dosyasına başarıyla kaydedildi.")
+def github_update_file(file_path, content, message):
+    url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{file_path}"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
 
-def read_data_from_file(file_path):
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        return data
-    except Exception as e:
-        print(f"{file_path} dosyası okunamadı: {e}")
-        return []
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    sha = response.json()['sha']
+
+    data = {
+        "message": message,
+        "content": base64.b64encode(content.encode('utf-8')).decode('utf-8'),
+        "sha": sha
+    }
+
+    response = requests.put(url, headers=headers, data=json.dumps(data))
+    response.raise_for_status()
+
+    print(f"{file_path} dosyası güncellendi.")
 
 def veri_cek():
     try:
@@ -68,10 +84,8 @@ def veri_cek():
 
                 if 'status-full-time' in [elem.get_attribute('data-testid') for elem in zaman_elementi]:
                     finished_matches.append(match_info)
-                    print(f"Biten Maç: {match_info}")
                 else:
                     matches.append(match_info)
-                    print(f"Maç: {match_info}")
 
             except Exception as e:
                 print(f"Maç ekleme hatası: {e}")
@@ -79,29 +93,26 @@ def veri_cek():
         driver.quit()
 
         if matches:
-            save_data_to_file(matches, GOAL_MACLAR_PATH)
+            matches_content = json.dumps(matches, ensure_ascii=False, indent=4)
+            github_update_file(FILES['goal_maclar.json'], matches_content, "Update ongoing matches")
         else:
             print("Veri bulunamadı veya yapı değişti.")
 
         if finished_matches:
-            save_data_to_file(finished_matches, GOAL_BITMIS_MACLAR_PATH)
+            finished_matches_content = json.dumps(finished_matches, ensure_ascii=False, indent=4)
+            github_update_file(FILES['goal_bitmis_maclar.json'], finished_matches_content, "Update finished matches")
         else:
             print("Biten maç verisi bulunamadı veya yapı değişti.")
-
-        try:
-            existing_matches = read_data_from_file(GOAL_MACLAR_PATH)
-            print(f"{GOAL_MACLAR_PATH} dosyası {len(existing_matches)} eleman içeriyor.")
-        except Exception as e:
-            print(f"Dosya okuma hatası: {e}")
-
-        try:
-            existing_finished_matches = read_data_from_file(GOAL_BITMIS_MACLAR_PATH)
-            print(f"{GOAL_BITMIS_MACLAR_PATH} dosyası {len(existing_finished_matches)} eleman içeriyor.")
-        except Exception as e:
-            print(f"Dosya okuma hatası: {e}")
 
     except Exception as e:
         print(f"Veri çekme sırasında hata oluştu: {e}")
 
+def surekli_veri_cekme():
+    schedule.every(1).minutes.do(veri_cek)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 if __name__ == "__main__":
-    veri_cek()
+    surekli_veri_cekme()
