@@ -25,20 +25,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install selenium requests schedule
 
-    - name: Install Chrome
-      run: |
-        choco install googlechrome --ignore-checksums
-
     - name: Get Chrome version
       id: chrome-version
       run: |
-        $chrome_version = (Get-Item 'C:\Program Files\Google\Chrome\Application\chrome.exe').VersionInfo.ProductVersion
+        $chrome_download_url = "https://www.techspot.com/downloads/downloadnow/4718/?evp=f33f94c36bf1ed807823493eea89f954&file=10011"
+        $response = Invoke-WebRequest -Uri $chrome_download_url -UseBasicParsing
+        $chrome_version_regex = '(?<=<strong>Version: )\d+\.\d+\.\d+\.\d+'
+        $chrome_version = ($response.Content -match $chrome_version_regex)[0]
         echo $chrome_version | Out-File -FilePath chrome_version.txt -Encoding utf8
         echo "Chrome version: $chrome_version"
-
-    - name: Remove existing ChromeDriver
-      run: |
-        Remove-Item -Path "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force -ErrorAction Ignore
 
     - name: Download and setup ChromeDriver
       run: |
@@ -46,6 +41,9 @@ jobs:
         $chrome_version_split = $chrome_version -split '\.'
         $major_version = $chrome_version_split[0] + "." + $chrome_version_split[1]
         $chromedriver_version = (Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$major_version" -UseBasicParsing).Content.Trim()
+        if (-not $chromedriver_version) {
+          $chromedriver_version = (Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE" -UseBasicParsing).Content.Trim()
+        }
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath .
         Move-Item -Path "chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
