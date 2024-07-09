@@ -35,11 +35,19 @@ jobs:
         echo "Chrome version found: $chrome_version"
         echo $chrome_version | Out-File -FilePath chrome_version.txt -Encoding utf8
 
-    - name: Download and setup Chromedriver
+    - name: Determine Chromedriver version
+      id: chromedriver-version
       run: |
         $chrome_version = Get-Content chrome_version.txt
         $chrome_major_version = $chrome_version -replace '\.\d+$'
-        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
+        $chromedriver_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
+        $chromedriver_version = Invoke-RestMethod -Uri $chromedriver_url
+        echo "Chromedriver version found: $chromedriver_version"
+        echo $chromedriver_version | Out-File -FilePath chromedriver_version.txt -Encoding utf8
+
+    - name: Download and setup Chromedriver
+      run: |
+        $chromedriver_version = Get-Content chromedriver_version.txt
         $chromedriver_download_url = "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip"
         Invoke-WebRequest -Uri $chromedriver_download_url -OutFile "chromedriver_win32.zip"
         Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath .
