@@ -49,7 +49,12 @@ jobs:
     - name: Download ChromeDriver
       run: |
         CHROME_VERSION=$(cat chrome_version.txt)
-        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+        # Manuel olarak uyumlu sürümü belirleyin
+        if [ "$CHROME_VERSION" == "126.0.6478.126" ]; then
+          CHROMEDRIVER_VERSION="126.0.6478.126"
+        else
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+        fi
         wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
         unzip -o ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
