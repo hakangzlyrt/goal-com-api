@@ -15,13 +15,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: List files for debugging
-      run: ls -R
-
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -49,8 +46,8 @@ jobs:
     - name: Download ChromeDriver
       run: |
         CHROME_VERSION=$(cat chrome_version.txt)
-        # Manuel olarak uyumlu sürümü belirleyin
-        if [ "$CHROME_VERSION" == "126.0.6478.126" ]; then
+        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
+        if [ "$MAJOR_VERSION" == "126" ]; then
           CHROMEDRIVER_VERSION="126.0.6478.126"
         else
           CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
