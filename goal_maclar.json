@@ -56,10 +56,10 @@
         "saat": "16:45"
     },
     {
-        "takim1": "Villa Dalmine",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
-        "takim2": "Colegiales",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
+        "takim1": "Canuelas",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
+        "takim2": "Deportivo Armenio",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
         "skor": " - ",
         "saat": "18:00"
     },
@@ -72,10 +72,10 @@
         "saat": "18:00"
     },
     {
-        "takim1": "Canuelas",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
-        "takim2": "Deportivo Armenio",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
+        "takim1": "Villa Dalmine",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
+        "takim2": "Colegiales",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
         "skor": " - ",
         "saat": "18:00"
     },
@@ -88,18 +88,18 @@
         "saat": "18:05"
     },
     {
-        "takim1": "Gimcheon Sangmu",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/dn1cz3b4rc04kzy5k33dg62m.png",
-        "takim2": "Suwon FC",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/229s1iq39lf40k945q50hauqw.png",
-        "skor": " - ",
-        "saat": "10:30"
-    },
-    {
         "takim1": "Daegu FC",
         "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/19auwjswq9camwpb4u14a6tp5.png",
         "takim2": "Incheon United",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4dkougngrd8mpvfb1cr9mdb1p.png",
+        "skor": " - ",
+        "saat": "10:30"
+    },
+    {
+        "takim1": "Gimcheon Sangmu",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/dn1cz3b4rc04kzy5k33dg62m.png",
+        "takim2": "Suwon FC",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/229s1iq39lf40k945q50hauqw.png",
         "skor": " - ",
         "saat": "10:30"
     },
