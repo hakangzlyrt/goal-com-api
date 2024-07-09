@@ -5,87 +5,7 @@
         "takim2": "Fransa",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4pz87gsel7183b7kcadw1dwzv.png",
         "skor": " - ",
-        "saat": "19:00"
-    },
-    {
-        "takim1": "Atlanta United",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/943ue6l8ylnidoygbi9p8op2h.png",
-        "takim2": "Indy Eleven",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/8cpjplodpphtkbt0hq8sr8mqs.png",
-        "skor": " - ",
-        "saat": "23:00"
-    },
-    {
-        "takim1": "PEC Zwolle",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2uuh2bir8ktof0uxfo06lb4ox.png",
-        "takim2": "Silkeborg",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/ahnt9ejgwj58ul8auzdvi3czf.png",
-        "skor": " - ",
-        "saat": "12:00"
-    },
-    {
-        "takim1": "Lille",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/be2k34rut1lz79jxenabttqlc.png",
-        "takim2": "Deinze",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/a6tfw86gs2hb39n2onyd3i4nn.png",
-        "skor": " - ",
-        "saat": "15:00"
-    },
-    {
-        "takim1": "Wolfsberger AC",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/9pn4d8sj6pmqidrhhlvev437k.png",
-        "takim2": "Strasbourg",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/71ajatxnuhc5cnm3xvgdky49w.png",
-        "skor": " - ",
-        "saat": "16:00"
-    },
-    {
-        "takim1": "Ajax",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d0zdg647gvgc95xdtk1vpbkys.png",
-        "takim2": "St.Truiden",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2989v3kho9h5jaboe1nr7lx21.png",
-        "skor": " - ",
-        "saat": "16:30"
-    },
-    {
-        "takim1": "SC Heerenveen",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4vd2t5schmvvufrfib7f2vjdf.png",
-        "takim2": "FC Dordrecht",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/z9phg19papi9f5fd6qxzr836.png",
-        "skor": " - ",
-        "saat": "16:45"
-    },
-    {
-        "takim1": "Canuelas",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
-        "takim2": "Deportivo Armenio",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
-        "skor": " - ",
-        "saat": "18:00"
-    },
-    {
-        "takim1": "Villa Dalmine",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
-        "takim2": "Colegiales",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
-        "skor": " - ",
-        "saat": "18:00"
-    },
-    {
-        "takim1": "Acassuso",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7yzmvr4f69naag434ijhvxcmr.png",
-        "takim2": "Villa San Carlos",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3ve3cwl0n3czzjxoze9bz8ydl.png",
-        "skor": " - ",
-        "saat": "18:00"
-    },
-    {
-        "takim1": "Laferrere",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1olg3hwewwaxxqju3zir3z4f0.png",
-        "takim2": "Comunicaciones",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/icy5wed57qug0qnvunnv6c15.png",
-        "skor": " - ",
-        "saat": "18:05"
+        "saat": "22:00"
     },
     {
         "takim1": "Daegu FC",
@@ -93,7 +13,7 @@
         "takim2": "Incheon United",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4dkougngrd8mpvfb1cr9mdb1p.png",
         "skor": " - ",
-        "saat": "10:30"
+        "saat": "13:30"
     },
     {
         "takim1": "Gimcheon Sangmu",
@@ -101,7 +21,79 @@
         "takim2": "Suwon FC",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/229s1iq39lf40k945q50hauqw.png",
         "skor": " - ",
-        "saat": "10:30"
+        "saat": "13:30"
+    },
+    {
+        "takim1": "Acassuso",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7yzmvr4f69naag434ijhvxcmr.png",
+        "takim2": "Villa San Carlos",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3ve3cwl0n3czzjxoze9bz8ydl.png",
+        "skor": " - ",
+        "saat": "21:00"
+    },
+    {
+        "takim1": "Villa Dalmine",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
+        "takim2": "Colegiales",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
+        "skor": " - ",
+        "saat": "21:00"
+    },
+    {
+        "takim1": "Canuelas",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
+        "takim2": "Deportivo Armenio",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
+        "skor": " - ",
+        "saat": "21:00"
+    },
+    {
+        "takim1": "Laferrere",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1olg3hwewwaxxqju3zir3z4f0.png",
+        "takim2": "Comunicaciones",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/icy5wed57qug0qnvunnv6c15.png",
+        "skor": " - ",
+        "saat": "21:05"
+    },
+    {
+        "takim1": "PEC Zwolle",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2uuh2bir8ktof0uxfo06lb4ox.png",
+        "takim2": "Silkeborg",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/ahnt9ejgwj58ul8auzdvi3czf.png",
+        "skor": " - ",
+        "saat": "15:00"
+    },
+    {
+        "takim1": "Lille",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/be2k34rut1lz79jxenabttqlc.png",
+        "takim2": "Deinze",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/a6tfw86gs2hb39n2onyd3i4nn.png",
+        "skor": " - ",
+        "saat": "18:00"
+    },
+    {
+        "takim1": "Wolfsberger AC",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/9pn4d8sj6pmqidrhhlvev437k.png",
+        "takim2": "Strasbourg",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/71ajatxnuhc5cnm3xvgdky49w.png",
+        "skor": " - ",
+        "saat": "19:00"
+    },
+    {
+        "takim1": "Ajax",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d0zdg647gvgc95xdtk1vpbkys.png",
+        "takim2": "St.Truiden",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2989v3kho9h5jaboe1nr7lx21.png",
+        "skor": " - ",
+        "saat": "19:30"
+    },
+    {
+        "takim1": "SC Heerenveen",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4vd2t5schmvvufrfib7f2vjdf.png",
+        "takim2": "FC Dordrecht",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/z9phg19papi9f5fd6qxzr836.png",
+        "skor": " - ",
+        "saat": "19:45"
     },
     {
         "takim1": "Montevideo City Torque",
@@ -109,6 +101,6 @@
         "takim2": "Plaza Colonia",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/6jzhmmq81qyit3b5u0sf1ak5k.png",
         "skor": " - ",
-        "saat": "19:30"
+        "saat": "22:30"
     }
 ]
