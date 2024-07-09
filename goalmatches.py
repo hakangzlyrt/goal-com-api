@@ -7,11 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Global variables to store last fetched data
-last_matches_content = None
-last_finished_matches_content = None
-
-# GitHub API and repository details
+# GitHub API ve repository bilgileri
 GITHUB_TOKEN = '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'
 REPO_OWNER = 'hakangzlyrt'
 REPO_NAME = 'goal-com-api'
@@ -20,7 +16,7 @@ FILES = {
     'goal_bitmis_maclar.json': 'goal_bitmis_maclar.json'
 }
 
-# GitHub update file function
+# GitHub üzerinde dosya güncelleme fonksiyonu
 def github_update_file(file_path, content, message):
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{file_path}"
     headers = {
@@ -29,19 +25,19 @@ def github_update_file(file_path, content, message):
     }
 
     try:
-        # Get current SHA of the file
+        # Dosyanın mevcut SHA değerini al
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         sha = response.json()['sha']
 
-        # Prepare data to update the file
+        # Dosyayı güncellemek için veriyi hazırla
         data = {
             "message": message,
             "content": base64.b64encode(content.encode('utf-8')).decode('utf-8'),
             "sha": sha
         }
 
-        # PUT request to update the file
+        # PUT isteği ile dosyayı güncelle
         response = requests.put(url, headers=headers, json=data)
         response.raise_for_status()
 
@@ -50,10 +46,8 @@ def github_update_file(file_path, content, message):
     except requests.exceptions.RequestException as e:
         print(f"Hata oluştu: {e}")
 
-# Data fetching function
+# Veri çekme fonksiyonu
 def veri_cek():
-    global last_matches_content, last_finished_matches_content
-
     try:
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -110,41 +104,39 @@ def veri_cek():
 
         driver.quit()
 
-        if matches:
-            matches_content = json.dumps(matches, ensure_ascii=False, indent=4)
-            if matches_content != last_matches_content:
-                with open('goal_maclar.json', 'w', encoding='utf-8') as f:
-                    f.write(matches_content)
-                github_update_file(FILES['goal_maclar.json'], matches_content, "Ongoing matches updated")
-                print("Maç verileri goal_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
-                last_matches_content = matches_content
-            else:
-                print("Maç verilerinde değişiklik yok, güncelleme yapılmadı.")
-
-        if finished_matches:
-            finished_matches_content = json.dumps(finished_matches, ensure_ascii=False, indent=4)
-            if finished_matches_content != last_finished_matches_content:
-                with open('goal_bitmis_maclar.json', 'w', encoding='utf-8') as f:
-                    f.write(finished_matches_content)
-                github_update_file(FILES['goal_bitmis_maclar.json'], finished_matches_content, "Finished matches updated")
-                print("Biten maç verileri goal_bitmis_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
-                last_finished_matches_content = finished_matches_content
-            else:
-                print("Biten maç verilerinde değişiklik yok, güncelleme yapılmadı.")
-
+        # Eski verileri oku
         try:
             with open('goal_maclar.json', 'r', encoding='utf-8') as f:
-                matches = json.load(f)
-            print(f"goal_maclar.json dosyası {len(matches)} eleman içeriyor.")
-        except Exception as e:
-            print(f"Dosya okuma hatası: {e}")
+                last_matches_content = f.read()
+        except FileNotFoundError:
+            last_matches_content = None
 
         try:
             with open('goal_bitmis_maclar.json', 'r', encoding='utf-8') as f:
-                finished_matches = json.load(f)
-            print(f"goal_bitmis_maclar.json dosyası {len(finished_matches)} eleman içeriyor.")
-        except Exception as e:
-            print(f"Dosya okuma hatası: {e}")
+                last_finished_matches_content = f.read()
+        except FileNotFoundError:
+            last_finished_matches_content = None
+
+        # Yeni verileri JSON formatına çevir
+        matches_content = json.dumps(matches, ensure_ascii=False, indent=4)
+        finished_matches_content = json.dumps(finished_matches, ensure_ascii=False, indent=4)
+
+        # Değişiklik olup olmadığını kontrol et ve güncelle
+        if matches_content != last_matches_content:
+            with open('goal_maclar.json', 'w', encoding='utf-8') as f:
+                f.write(matches_content)
+            github_update_file(FILES['goal_maclar.json'], matches_content, "Ongoing matches updated")
+            print("Maç verileri goal_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
+        else:
+            print("Maç verilerinde değişiklik yok, güncelleme yapılmadı.")
+
+        if finished_matches_content != last_finished_matches_content:
+            with open('goal_bitmis_maclar.json', 'w', encoding='utf-8') as f:
+                f.write(finished_matches_content)
+            github_update_file(FILES['goal_bitmis_maclar.json'], finished_matches_content, "Finished matches updated")
+            print("Biten maç verileri goal_bitmis_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
+        else:
+            print("Biten maç verilerinde değişiklik yok, güncelleme yapılmadı.")
 
     except Exception as e:
         print(f"Veri çekme sırasında hata oluştu: {e}")
