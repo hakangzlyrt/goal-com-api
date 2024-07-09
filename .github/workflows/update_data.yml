@@ -44,7 +44,7 @@ jobs:
     - name: Run Python script
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python ./main/goalmatches.py
+      run: python ./goalmatches.py
 
     - name: Commit and push changes
       run: |
