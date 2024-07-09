@@ -42,6 +42,8 @@ jobs:
 
       - name: Commit and push updated files
         if: steps.git-status.outputs.changes_detected == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Personal Access Token'ınızı kullanın
         run: |
           git add .
           git commit -m "Auto-update data files"
