@@ -9,7 +9,7 @@ on:
 
 jobs:
   update_scores:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
@@ -27,38 +27,30 @@ jobs:
 
     - name: Install Chrome
       run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
+        choco install googlechrome
 
     - name: Get Chrome version
       id: chrome-version
       run: |
-        google-chrome --version
-        google-chrome --version | grep -oP '\d+\.\d+\.\d+' > chrome_version.txt
+        powershell "(Get-Item 'C:\Program Files\Google\Chrome\Application\chrome.exe').VersionInfo.ProductVersion" | Out-File -FilePath chrome_version.txt -Encoding utf8
         echo "Chrome version: $(cat chrome_version.txt)"
-
-    - name: Remove existing ChromeDriver
-      run: |
-        sudo rm -f /usr/local/bin/chromedriver
-        sudo rm -f /usr/bin/chromedriver
-        sudo rm -f /usr/local/share/chromedriver
 
     - name: Download ChromeDriver
       run: |
-        CHROME_VERSION=$(cat chrome_version.txt)
-        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1-3)
-        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
-        if [ -z "$CHROMEDRIVER_VERSION" ]; then
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-        fi
-        wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
-        unzip -o ~/chromedriver_linux64.zip -d ~/
-        sudo mv -f ~/chromedriver /usr/local/share/chromedriver
-        sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-        sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+        $chrome_version = Get-Content chrome_version.txt
+        $chrome_version_split = $chrome_version -split '\.'
+        $major_version = $chrome_version_split[0]
+        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$major_version"
+        Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
+        Expand-Archive chromedriver_win32.zip -DestinationPath "chromedriver"
+        Move-Item -Path "chromedriver/chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe"
+
+    - name: Add ChromeDriver to PATH
+      run: |
+        echo "::add-path::C:\Program Files\Google\Chrome\Application"
 
     - name: List files for debugging
-      run: ls -R
+      run: dir
 
     - name: Run Python script
       env:
