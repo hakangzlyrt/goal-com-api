@@ -30,29 +30,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Get Chrome version
-      id: chrome-version
-      run: |
-        google-chrome --version
-        google-chrome --version | grep -oP '\d+\.\d+\.\d+' > chrome_version.txt
-        echo "Chrome version: $(cat chrome_version.txt)"
-
-    - name: Remove existing ChromeDriver
-      run: |
-        sudo rm -f /usr/local/bin/chromedriver
-        sudo rm -f /usr/bin/chromedriver
-        sudo rm -f /usr/local/share/chromedriver
-
     - name: Download ChromeDriver
       run: |
-        CHROME_VERSION=$(cat chrome_version.txt)
-        # Ana sürüm numarasını belirleyin
-        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1-2)
-        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
-        if [ -z "$CHROMEDRIVER_VERSION" ]; then
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-        fi
-        wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+        wget -N https://chromedriver.storage.googleapis.com/126.0.6478.0/chromedriver_linux64.zip -P ~/
         unzip -o ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
