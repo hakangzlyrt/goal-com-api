@@ -64,18 +64,18 @@
         "saat": "18:00"
     },
     {
-        "takim1": "Acassuso",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7yzmvr4f69naag434ijhvxcmr.png",
-        "takim2": "Villa San Carlos",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3ve3cwl0n3czzjxoze9bz8ydl.png",
-        "skor": " - ",
-        "saat": "18:00"
-    },
-    {
         "takim1": "Villa Dalmine",
         "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
         "takim2": "Colegiales",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
+        "skor": " - ",
+        "saat": "18:00"
+    },
+    {
+        "takim1": "Acassuso",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7yzmvr4f69naag434ijhvxcmr.png",
+        "takim2": "Villa San Carlos",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3ve3cwl0n3czzjxoze9bz8ydl.png",
         "skor": " - ",
         "saat": "18:00"
     },
