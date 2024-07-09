@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Sadece main branch'e push yapıldığında tetikle
   schedule:
-    - cron: "*/15 * * * *"  # Her 15 dakikada bir çalıştır
+    - cron: "*/10 * * * *"  # Her dakika çalıştır
 
 jobs:
   fetch_and_update:
@@ -28,23 +28,21 @@ jobs:
           python -m pip install requests selenium schedule
 
       - name: Run data fetching script
-        id: fetch-data
         run: python goalmatches.py  # goalmatches.py dosyanızın adını ve yolunu belirtin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token'ınızı secrets'tan alın
 
-      - name: Check if data has changed
-        id: check-changes
-        run: |
-          git diff --quiet || echo "::set-output name=changed::true"
-        working-directory: ${{ github.workspace }}
-
       - name: Commit and push updated files
-        if: steps.check-changes.outputs.changed == 'true'
+        if: always()  # Her durumda devam etmesini sağlar
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-
+          
+          # Dosya değişikliklerini ekleyin
           git add .
+          
+          # Değişiklikleri commit edin
           git commit -m "Auto-update data files"
+          
+          # Güncellemeleri GitHub'a push edin
           git push
