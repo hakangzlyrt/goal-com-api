@@ -1,186 +1,26 @@
 [
     {
-        "takim1": "Internacional",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/c7n1isjmpyqt5pj51yekr08wo.png",
-        "takim2": "Vasco da Gama",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/5ponlslulpugdlvd93n9yqu2b.png",
-        "skor": "1 - 2",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Vitoria",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/436xob9epu7bzdu7c1zzjjdak.png",
-        "takim2": "Criciuma",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/9ri292j4uqvn567soly0xrmrx.png",
-        "skor": "2 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Atletico GO",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/441ion913h05bwxctg48884uh.png",
-        "takim2": "Athletico Paranaense",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/5h3amvo8ykt01u4h3upw3c5qf.png",
-        "skor": "1 - 2",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Palmeiras",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/b9d2xcvxxcwplyp4le9ulnlv9.png",
-        "takim2": "Bahia",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/e93fgat6j6g86zqul1m3m2kpn.png",
-        "skor": "2 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Botafogo RJ",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2x94b2pn1o1tb5l1bbu8x9yu9.png",
-        "takim2": "Atletico MG",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1f6qzkdjh8fih5ii1eyqmkolq.png",
-        "skor": "3 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Pachuca",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cynfvfb31rml7xrlsnejf8r6j.png",
-        "takim2": "Monterrey",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/233335xtoe3e3phg3hp91xguq.png",
+        "takim1": "Avai FC",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4junv0ald7bkwrsr0hynf05iz.png",
+        "takim2": "Novorizontino",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/9cl05467nuteeh2yk1ylr897l.png",
         "skor": "0 - 1",
         "saat": "MS"
     },
     {
-        "takim1": "San Jose Earthquakes",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/a2jg79bf9ab1vj6iok2r328cc.png",
-        "takim2": "Chicago Fire FC",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/apsqaaege20za4re5wm6bzq9a.png",
+        "takim1": "Sao Bernardo",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/82ng59yij7r96hwr24uzxibq4.png",
+        "takim2": "Botafogo PB",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/bp7joptcwvnp7is338b2s51is.png",
         "skor": "1 - 0",
         "saat": "MS"
     },
     {
-        "takim1": "Sporting Kansas City",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3olfhpj6emfhceudd95ytb9gy.png",
-        "takim2": "FC Dallas",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/4gi4qw4gt6nfq0c6r8y574qgp.png",
-        "skor": "3 - 2",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Colorado Rapids",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cvrl5bces32x6fup1ks1hvets.png",
-        "takim2": "St. Louis City",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7rh4h3y77fl3s7rdqp61si49g.png",
-        "skor": "4 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "LA Galaxy",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/6qr5y32dthc4dqycckwmfj1si.png",
-        "takim2": "Minnesota United",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/dna80a164iz5ta6pp6ivk64rx.png",
-        "skor": "2 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Portland Timbers",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/77o8sorlijzpr0t4s7231zzxp.png",
-        "takim2": "Nashville SC",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1oogd0fpwledjm2ycsuv7afze.png",
-        "skor": "4 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Guarani",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/15akzajbqir3ko16ly444nz1i.png",
-        "takim2": "Sport Recife",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/724zlangqbn2pr3e6rws1c9um.png",
-        "skor": "0 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Pharco FC",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/ac28s7fw8w1z6ewv4z67z4b8p.png",
-        "takim2": "El Dakhleya",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/94nnizmzv80n2a1nrde55t8iw.png",
-        "skor": "2 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Al Ittihad Alexandria",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/87zdolahphujsbgcu4wyyew7n.png",
-        "takim2": "Pyramids FC",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/a5hh43fi88rchrm37263600hu.png",
-        "skor": "0 - 4",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Al Ahly SC",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1q2hx9pw8c7x88utqunk4e6xl.png",
-        "takim2": "Tala'ea El Gaish",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/22uhz0spcrm9f2ew7fyk9lgvl.png",
-        "skor": "2 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Tombense FC",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/5knj6wxpgi0m7g2jtz09md64j.png",
-        "takim2": "Nautico",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/3xiov3h91844kh0omyrnb4qp6.png",
-        "skor": "0 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Confianca",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/b0myud94jki9zwc2ral9lse0n.png",
-        "takim2": "Ypiranga RS",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1rzud6lay27tioh0oo67m4qr9.png",
-        "skor": "2 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Defensor Sporting",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/21sdnh4ueo8he1r42ebn0sz0.png",
-        "takim2": "Montevideo Wanderers",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/ehyuxeire7ruxvc4nszvyiktx.png",
-        "skor": "1 - 1",
-        "saat": "MS"
-    },
-    {
-        "takim1": "WSG Tirol",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/7uh2y9tk3j8dk6zinfu38pygi.png",
-        "takim2": "FC Koebenhavn",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/b3r6d8ydtmtjckam6pku9y400.png",
-        "skor": "0 - 5",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Queretaro",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/1j1z7278in74aks66e7z2e0a.png",
-        "takim2": "Club Tijuana",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/59pcxo6gjhl89dir02c9n1j6y.png",
-        "skor": "1 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Atletico de San Luis",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/723iqtis2afkaq656r7odf7u2.png",
-        "takim2": "Mazatlan FC",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/20115lt7y4fetm2ur4t4nqb8q.png",
-        "skor": "1 - 0",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Atlas",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/6aiehp33aiod64yvhqos3u2.png",
-        "takim2": "Tigres",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/6yfdc2frjgibkax4c2uf2hbhm.png",
-        "skor": "1 - 3",
-        "saat": "MS"
-    },
-    {
-        "takim1": "Seattle Reign FC",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/bl53jk6zlfe5f583pil7xzwi5.png",
-        "takim2": "Utah Royals",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/bn7w86uw8j61dga3xr5s0yiju.png",
-        "skor": "1 - 1",
+        "takim1": "Caxias",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/2p1716ysd19qkp17jz337tpq5.png",
+        "takim2": "Remo",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/eks7plclfqznw5kd17zlq6dhm.png",
+        "skor": "2 - 4",
         "saat": "MS"
     }
 ]
