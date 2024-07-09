@@ -16,9 +16,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.10'
+        python-version: '3.x'  # Python sürümünü uygun şekilde belirtin
 
     - name: Install dependencies
       run: |
@@ -38,12 +38,9 @@ jobs:
     - name: Download and setup ChromeDriver
       run: |
         $chrome_version = Get-Content chrome_version.txt
-        $chrome_version_split = $chrome_version -split '\.'
-        $major_version = $chrome_version_split[0] + "." + $chrome_version_split[1]
-        $chromedriver_version = (Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$major_version" -UseBasicParsing).Content.Trim()
-        if (-not $chromedriver_version) {
-          $chromedriver_version = (Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE" -UseBasicParsing).Content.Trim()
-        }
+        $chrome_major_version = $chrome_version -replace '\.\d+$'
+        $chromedriver_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
+        $chromedriver_version = Invoke-WebRequest -Uri $chromedriver_url -UseBasicParsing
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath .
         Move-Item -Path "chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
