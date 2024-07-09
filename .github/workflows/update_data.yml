@@ -35,23 +35,24 @@ jobs:
 
     - name: Get Chrome version
       id: chrome-version
-      run: google-chrome --version
+      run: |
+        google-chrome --version | grep -oP '\d+\.\d+\.\d+' > chrome_version.txt
+        echo "Chrome version: $(cat chrome_version.txt)"
 
     - name: Download ChromeDriver
       run: |
-        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-        wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/
-        unzip ~/chromedriver_linux64.zip -d ~/
+        CHROME_VERSION=$(cat chrome_version.txt)
+        CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+        unzip -o ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
-        sudo rm /usr/local/bin/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
     - name: Run Python script
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python ./goalmatches.py
+      run: python ./main/goalmatches.py
 
     - name: Commit and push changes
       run: |
