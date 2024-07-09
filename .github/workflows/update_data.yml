@@ -50,13 +50,17 @@ jobs:
         if [ "$MAJOR_VERSION" == "126" ]; then
           CHROMEDRIVER_VERSION="126.0.6478.126"
         else
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"); fi
         fi
         wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
         unzip -o ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+
+    - name: List files for debugging
+      run: ls -R
 
     - name: Run Python script
       env:
