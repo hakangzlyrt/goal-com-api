@@ -46,7 +46,8 @@ jobs:
     - name: Download ChromeDriver
       run: |
         CHROME_VERSION=$(cat chrome_version.txt)
-        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
+        # Ana sürüm numarasını belirleyin
+        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1-2)
         CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
         if [ -z "$CHROMEDRIVER_VERSION" ]; then
           CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
