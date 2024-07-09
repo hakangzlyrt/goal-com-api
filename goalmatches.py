@@ -1,5 +1,3 @@
-import schedule
-import time
 import json
 import base64
 import requests
@@ -9,6 +7,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# Global variables to store last fetched data
+last_matches_content = None
+last_finished_matches_content = None
+
+# GitHub API and repository details
 GITHUB_TOKEN = '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'
 REPO_OWNER = 'hakangzlyrt'
 REPO_NAME = 'goal-com-api'
@@ -17,6 +20,7 @@ FILES = {
     'goal_bitmis_maclar.json': 'goal_bitmis_maclar.json'
 }
 
+# GitHub update file function
 def github_update_file(file_path, content, message):
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{file_path}"
     headers = {
@@ -24,22 +28,32 @@ def github_update_file(file_path, content, message):
         "Accept": "application/vnd.github.v3+json"
     }
 
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    sha = response.json()['sha']
+    try:
+        # Get current SHA of the file
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        sha = response.json()['sha']
 
-    data = {
-        "message": message,
-        "content": base64.b64encode(content.encode('utf-8')).decode('utf-8'),
-        "sha": sha
-    }
+        # Prepare data to update the file
+        data = {
+            "message": message,
+            "content": base64.b64encode(content.encode('utf-8')).decode('utf-8'),
+            "sha": sha
+        }
 
-    response = requests.put(url, headers=headers, data=json.dumps(data))
-    response.raise_for_status()
+        # PUT request to update the file
+        response = requests.put(url, headers=headers, json=data)
+        response.raise_for_status()
 
-    print(f"{file_path} dosyası güncellendi.")
+        print(f"{file_path} dosyası güncellendi.")
 
+    except requests.exceptions.RequestException as e:
+        print(f"Hata oluştu: {e}")
+
+# Data fetching function
 def veri_cek():
+    global last_matches_content, last_finished_matches_content
+
     try:
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -98,22 +112,26 @@ def veri_cek():
 
         if matches:
             matches_content = json.dumps(matches, ensure_ascii=False, indent=4)
-            with open('goal_maclar.json', 'w', encoding='utf-8') as f:
-                f.write(matches_content)
-            github_update_file(FILES['goal_maclar.json'], matches_content, "Update ongoing matches")
-            print("Maç verileri goal_maclar.json dosyasına başarıyla kaydedildi ve GitHub'a yüklendi.")
-        else:
-            print("Veri bulunamadı veya yapı değişti.")
+            if matches_content != last_matches_content:
+                with open('goal_maclar.json', 'w', encoding='utf-8') as f:
+                    f.write(matches_content)
+                github_update_file(FILES['goal_maclar.json'], matches_content, "Ongoing matches updated")
+                print("Maç verileri goal_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
+                last_matches_content = matches_content
+            else:
+                print("Maç verilerinde değişiklik yok, güncelleme yapılmadı.")
 
         if finished_matches:
             finished_matches_content = json.dumps(finished_matches, ensure_ascii=False, indent=4)
-            with open('goal_bitmis_maclar.json', 'w', encoding='utf-8') as f:
-                f.write(finished_matches_content)
-            github_update_file(FILES['goal_bitmis_maclar.json'], finished_matches_content, "Update finished matches")
-            print("Biten maç verileri goal_bitmis_maclar.json dosyasına başarıyla kaydedildi ve GitHub'a yüklendi.")
-        else:
-            print("Biten maç verisi bulunamadı veya yapı değişti.")
-        
+            if finished_matches_content != last_finished_matches_content:
+                with open('goal_bitmis_maclar.json', 'w', encoding='utf-8') as f:
+                    f.write(finished_matches_content)
+                github_update_file(FILES['goal_bitmis_maclar.json'], finished_matches_content, "Finished matches updated")
+                print("Biten maç verileri goal_bitmis_maclar.json dosyasına kaydedildi ve GitHub'a güncellendi.")
+                last_finished_matches_content = finished_matches_content
+            else:
+                print("Biten maç verilerinde değişiklik yok, güncelleme yapılmadı.")
+
         try:
             with open('goal_maclar.json', 'r', encoding='utf-8') as f:
                 matches = json.load(f)
@@ -131,12 +149,6 @@ def veri_cek():
     except Exception as e:
         print(f"Veri çekme sırasında hata oluştu: {e}")
 
-def surekli_veri_cekme():
-    schedule.every(10).minutes.do(veri_cek)
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
+# Eğer script direk çalıştırıldıysa veri çekme işlemini başlat
 if __name__ == "__main__":
-    surekli_veri_cekme()
+    veri_cek()
