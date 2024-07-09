@@ -28,15 +28,25 @@ jobs:
         python -m pip install --upgrade pip
         pip install selenium requests schedule
 
-    - name: Download ChromeDriver
+    - name: Install Chrome
       run: |
         sudo apt-get update
-        sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4
-        wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip -P ~/
+        sudo apt-get install -y google-chrome-stable
+
+    - name: Get Chrome version
+      id: chrome-version
+      run: google-chrome --version
+
+    - name: Download ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+        wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/
         unzip ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
-        if [ ! -f /usr/local/bin/chromedriver ]; then sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver; fi
-        if [ ! -f /usr/bin/chromedriver ]; then sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver; fi
+        sudo rm /usr/local/bin/chromedriver
+        sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+        sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
     - name: Run Python script
       env:
