@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Sadece main branch'e push yapıldığında tetikle
   schedule:
-    - cron: "*/10 * * * *"  # Her dakika çalıştır
+    - cron: "0 */1 * * *"  # Her saat başı çalıştır
 
 jobs:
   fetch_and_update:
