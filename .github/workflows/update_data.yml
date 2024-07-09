@@ -18,7 +18,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Python sürümünü uygun şekilde belirtin
+        python-version: '3.x'  # Kullandığınız Python sürümüne göre ayarlayın
 
     - name: Install dependencies
       run: |
@@ -35,22 +35,22 @@ jobs:
         echo $chrome_version | Out-File -FilePath chrome_version.txt -Encoding utf8
         echo "Chrome version: $chrome_version"
 
-    - name: Download and setup ChromeDriver
+    - name: Download and setup Chromedriver
       run: |
         $chrome_version = Get-Content chrome_version.txt
         $chrome_major_version = $chrome_version -replace '\.\d+$'
         $chromedriver_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
-        $chromedriver_version = Invoke-WebRequest -Uri $chromedriver_url -UseBasicParsing
+        $chromedriver_version = (Invoke-WebRequest -Uri $chromedriver_url -UseBasicParsing).Content.Trim()
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath .
         Move-Item -Path "chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
 
-    - name: Add ChromeDriver to PATH
+    - name: Add Chromedriver to PATH
       run: |
         $newPath = "C:\Program Files\Google\Chrome\Application;" + $env:Path
         [Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
 
-    - name: Verify ChromeDriver
+    - name: Verify Chromedriver
       run: |
         chromedriver --version
 
