@@ -1,81 +1,31 @@
-name: Update Scores
+name: Scheduled Data Fetch and Update
 
 on:
-  schedule:
-    - cron: '*/1 * * * *'  # Her dakikada bir çalıştır
   push:
     branches:
-      - main
+      - main  # Sadece main branch'te push yapıldığında tetikle
+  schedule:
+    - cron: "*/1 * * * *"  # Her dakika çalıştır
 
 jobs:
-  update_scores:
-    runs-on: windows-latest
+  fetch_and_update:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'  # Kullandığınız Python sürümüne göre ayarlayın
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Python sürümünüzü belirtin
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Gereksinimlerinizi belirtin, eğer varsa
 
-    - name: Determine Chrome version
-      id: chrome-version
-      run: |
-        $chrome_download_url = "https://www.google.com/chrome/"
-        $response = Invoke-WebRequest -Uri $chrome_download_url -UseBasicParsing
-        $chrome_version_regex = '(?<=<span class="BNeawe iBp4i AP7Wnd">)\d+\.\d+\.\d+\.\d+'
-        $chrome_version = ($response.Content -match $chrome_version_regex)[0]
-        echo "Chrome version found: $chrome_version"
-        echo $chrome_version | Out-File -FilePath chrome_version.txt -Encoding utf8
-
-    - name: Determine Chromedriver version
-      id: chromedriver-version
-      run: |
-        $chrome_version = Get-Content chrome_version.txt
-        $chrome_major_version = $chrome_version -replace '\.\d+$'
-        $chromedriver_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
-        $chromedriver_version = Invoke-RestMethod -Uri $chromedriver_url -UseBasicParsing
-        echo "Chromedriver version found: $chromedriver_version"
-        echo $chromedriver_version | Out-File -FilePath chromedriver_version.txt -Encoding utf8
-
-    - name: Download and setup Chromedriver
-      run: |
-        $chromedriver_version = Get-Content chromedriver_version.txt
-        $chromedriver_download_url = "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip"
-        Invoke-WebRequest -Uri $chromedriver_download_url -OutFile "chromedriver_win32.zip"
-        Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath .
-        Move-Item -Path ".\chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
-
-    - name: Add Chromedriver to PATH
-      run: |
-        $newPath = "C:\Program Files\Google\Chrome\Application;" + $env:Path
-        [Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
-
-    - name: Verify Chromedriver
-      run: |
-        chromedriver --version
-
-    - name: List files for debugging
-      run: dir "C:\Program Files\Google\Chrome\Application"
-
-    - name: Run Python script
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python ./goalmatches.py
-
-    - name: Commit and push changes
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .
-        git commit -m 'Update scores'
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run data fetching script
+        run: goalmatches.py  # Python script'inizin yolunu belirtin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token'ınızı secrets'tan alın
