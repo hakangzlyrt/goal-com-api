@@ -132,7 +132,7 @@ def veri_cek():
         print(f"Veri çekme sırasında hata oluştu: {e}")
 
 def surekli_veri_cekme():
-    schedule.every(1).minutes.do(veri_cek)
+    schedule.every(10).minutes.do(veri_cek)
 
     while True:
         schedule.run_pending()
