@@ -47,11 +47,9 @@ jobs:
       run: |
         CHROME_VERSION=$(cat chrome_version.txt)
         MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
-        if [ "$MAJOR_VERSION" == "126" ]; then
-          CHROMEDRIVER_VERSION="126.0.6478.126"
-        else
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"); fi
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
+        if [ -z "$CHROMEDRIVER_VERSION" ]; then
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
         fi
         wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
         unzip -o ~/chromedriver_linux64.zip -d ~/
@@ -65,7 +63,7 @@ jobs:
     - name: Run Python script
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python ./goalmatches.py
+      run: python ./main/goalmatches.py
 
     - name: Commit and push changes
       run: |
