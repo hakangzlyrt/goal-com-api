@@ -37,7 +37,7 @@ jobs:
       id: chrome-version
       run: |
         google-chrome --version
-        google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+' > chrome_version.txt
+        google-chrome --version | grep -oP '\d+\.\d+\.\d+' > chrome_version.txt
         echo "Chrome version: $(cat chrome_version.txt)"
 
     - name: Remove existing ChromeDriver
@@ -49,13 +49,7 @@ jobs:
     - name: Download ChromeDriver
       run: |
         CHROME_VERSION=$(cat chrome_version.txt)
-        MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
-        if [ "$MAJOR_VERSION" == "126" ]; then
-          CHROMEDRIVER_VERSION="126.0.6478.126"
-        else
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"); fi
-        fi
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
         wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
         unzip -o ~/chromedriver_linux64.zip -d ~/
         sudo mv -f ~/chromedriver /usr/local/share/chromedriver
@@ -65,7 +59,7 @@ jobs:
     - name: Run Python script
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: python ./goalmatches.py
+      run: python ./main/goalmatches.py
 
     - name: Commit and push changes
       run: |
