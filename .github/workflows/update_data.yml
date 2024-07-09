@@ -44,7 +44,7 @@ jobs:
 
     - name: Add ChromeDriver to PATH
       run: |
-        echo "::add-path::C:\Program Files\Google\Chrome\Application"
+        echo "C:\Program Files\Google\Chrome\Application" >> $env:GITHUB_PATH
 
     - name: List files for debugging
       run: dir
