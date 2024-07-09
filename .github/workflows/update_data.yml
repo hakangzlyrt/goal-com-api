@@ -28,21 +28,21 @@ jobs:
           python -m pip install requests selenium schedule
 
       - name: Run data fetching script
+        id: run-script
         run: python goalmatches.py  # goalmatches.py dosyanızın adını ve yolunu belirtin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token'ınızı secrets'tan alın
 
-      - name: Commit and push updated files
-        if: always()  # Her durumda devam etmesini sağlar
+      - name: Check for changes
+        id: git-status
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Dosya değişikliklerini ekleyin
+          git diff --quiet || echo "::set-output name=changes_detected::true"
+
+      - name: Commit and push updated files
+        if: steps.git-status.outputs.changes_detected == 'true'
+        run: |
           git add .
-          
-          # Değişiklikleri commit edin
           git commit -m "Auto-update data files"
-          
-          # Güncellemeleri GitHub'a push edin
           git push
