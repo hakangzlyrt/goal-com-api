@@ -56,18 +56,18 @@
         "saat": "16:45"
     },
     {
-        "takim1": "Canuelas",
-        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
-        "takim2": "Deportivo Armenio",
-        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
-        "skor": " - ",
-        "saat": "18:00"
-    },
-    {
         "takim1": "Villa Dalmine",
         "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/enggekgyta3n33z2pd4exvo0s.png",
         "takim2": "Colegiales",
         "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/983n3ng7mqncrjh0oo8kjccp8.png",
+        "skor": " - ",
+        "saat": "18:00"
+    },
+    {
+        "takim1": "Canuelas",
+        "takim1resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/d6y75tdk531f1fktjgqgbx2fa.png",
+        "takim2": "Deportivo Armenio",
+        "takim2resim": "https://cdn.sportfeeds.io/sdl/images/team/crest/medium/cwxdondxcuaobgimfi71sesov.png",
         "skor": " - ",
         "saat": "18:00"
     },
