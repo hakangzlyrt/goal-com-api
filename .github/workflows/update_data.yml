@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Sadece main branch'e push yapıldığında tetikle
   schedule:
-    - cron: "*/5 * * * *"  # Her dakika çalıştır
+    - cron: "*/1 * * * *"  # Her dakika çalıştır
 
 jobs:
   fetch_and_update:
@@ -31,3 +31,12 @@ jobs:
         run: python goalmatches.py  # goalmatches.py dosyanızın adını ve yolunu belirtin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token'ınızı secrets'tan alın
+
+      - name: Commit and push updated files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add .
+          git commit -m "Auto-update data files"
+          git push
