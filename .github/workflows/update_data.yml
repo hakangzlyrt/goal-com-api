@@ -29,35 +29,23 @@ jobs:
       run: |
         choco install googlechrome
 
-    - name: Get Chrome version
-      id: chrome-version
-      run: |
-        powershell "(Get-Item 'C:\Program Files\Google\Chrome\Application\chrome.exe').VersionInfo.ProductVersion" | Out-File -FilePath chrome_version.txt -Encoding utf8
-        echo "Chrome version: $(cat chrome_version.txt)"
-
     - name: Remove existing ChromeDriver
       run: |
-        Remove-Item -Path "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
+        Remove-Item -Path "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force -ErrorAction Ignore
 
     - name: Download ChromeDriver
       run: |
-        $chrome_version = Get-Content chrome_version.txt
-        $chrome_version_split = $chrome_version -split '\.'
-        $major_version = $chrome_version_split[0] + "." + $chrome_version_split[1] + "." + $chrome_version_split[2]
-        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$major_version"
-        if (-not $chromedriver_version) {
-          $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
-        }
+        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive chromedriver_win32.zip -DestinationPath "chromedriver"
-        Move-Item -Path "chromedriver/chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe"
+        Move-Item -Path "chromedriver/chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
 
     - name: Add ChromeDriver to PATH
       run: |
-        echo "C:\Program Files\Google\Chrome\Application" >> $env:GITHUB_PATH
+        echo "C:\Program Files\Google\Chrome\Application" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: List files for debugging
-      run: dir
+      run: dir "C:\Program Files\Google\Chrome\Application"
 
     - name: Run Python script
       env:
