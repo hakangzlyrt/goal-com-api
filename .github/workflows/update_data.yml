@@ -3,7 +3,7 @@ name: Scheduled Data Fetch and Update
 on:
   push:
     branches:
-      - main  # Sadece main branch'te push yapıldığında tetikle
+      - main  # Sadece main branch'e push yapıldığında tetikle
   schedule:
     - cron: "*/1 * * * *"  # Her dakika çalıştır
 
@@ -24,11 +24,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install requests selenium schedule
           # Eğer requirements.txt dosyanız varsa aşağıdaki satırı kullanabilirsiniz
-          # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
 
       - name: Run data fetching script
         run: python goalmatches.py  # goalmatches.py dosyanızın adını ve yolunu belirtin
