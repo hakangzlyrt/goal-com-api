@@ -29,13 +29,26 @@ jobs:
       run: |
         choco install googlechrome
 
+    - name: Get Chrome version
+      id: chrome-version
+      run: |
+        $chrome_version = (Get-Item 'C:\Program Files\Google\Chrome\Application\chrome.exe').VersionInfo.ProductVersion
+        echo $chrome_version | Out-File -FilePath chrome_version.txt -Encoding utf8
+        echo "Chrome version: $chrome_version"
+
     - name: Remove existing ChromeDriver
       run: |
         Remove-Item -Path "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force -ErrorAction Ignore
 
     - name: Download ChromeDriver
       run: |
-        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
+        $chrome_version = Get-Content chrome_version.txt
+        $chrome_version_split = $chrome_version -split '\.'
+        $major_version = $chrome_version_split[0] + "." + $chrome_version_split[1] + "." + $chrome_version_split[2]
+        $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$major_version"
+        if (-not $chromedriver_version) {
+          $chromedriver_version = Invoke-RestMethod -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
+        }
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive chromedriver_win32.zip -DestinationPath "chromedriver"
         Move-Item -Path "chromedriver/chromedriver.exe" -Destination "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -Force
@@ -43,6 +56,11 @@ jobs:
     - name: Add ChromeDriver to PATH
       run: |
         echo "C:\Program Files\Google\Chrome\Application" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Verify ChromeDriver
+      run: |
+        .\chromedriver.exe --version
+      working-directory: "C:\Program Files\Google\Chrome\Application"
 
     - name: List files for debugging
       run: dir "C:\Program Files\Google\Chrome\Application"
