@@ -18,12 +18,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Kullandığınız Python sürümüne göre ayarlayın
+        python-version: '3.9'  # Kullandığınız Python sürümüne göre ayarlayın
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium requests schedule
+        pip install requests
 
     - name: Determine Chrome version
       id: chrome-version
@@ -41,7 +41,7 @@ jobs:
         $chrome_version = Get-Content chrome_version.txt
         $chrome_major_version = $chrome_version -replace '\.\d+$'
         $chromedriver_url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$chrome_major_version"
-        $chromedriver_version = Invoke-RestMethod -Uri $chromedriver_url
+        $chromedriver_version = Invoke-RestMethod -Uri $chromedriver_url -UseBasicParsing
         echo "Chromedriver version found: $chromedriver_version"
         echo $chromedriver_version | Out-File -FilePath chromedriver_version.txt -Encoding utf8
 
