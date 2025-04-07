@@ -8,8 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # GitHub API ve repository bilgileri
-GITHUB_TOKEN = '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'
-REPO_OWNER = 'hakangzlyrt'
+GITHUB_TOKEN = ''
+REPO_OWNER = ''
 REPO_NAME = 'goal-com-api'
 FILES = {
     'goal_maclar.json': 'goal_maclar.json',
